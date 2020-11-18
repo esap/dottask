@@ -1,6 +1,9 @@
 package task
 
-import "context"
+import (
+	"context"
+	"strings"
+)
 
 //Task上下文信息
 type TaskContext struct {
@@ -13,6 +16,10 @@ type TaskContext struct {
 	TimeoutContext context.Context
 	TimeoutCancel  context.CancelFunc
 	doneChan       chan struct{}
+}
+
+func (t *TaskContext) Param(i int) string {
+	return strings.Split(t.TaskID, " ")[i]
 }
 
 func (c TaskContext) reset() {
